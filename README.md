@@ -1,4 +1,4 @@
-# InvoiceManager-Java
+# Invoice Manager using Java
 
 ![Java Badge](https://img.shields.io/badge/Java-17.0.8-blue.svg)
 ![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)
