@@ -26,7 +26,7 @@ InvoiceManager-Java is a Java-based application for managing invoices and purcha
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/seu-usuario/InvoiceManager-Java.git
+   git clone https://github.com/LucasLessa14/java-invoice-manager.git
    ```
 
 2. Navigate to the project directory:
