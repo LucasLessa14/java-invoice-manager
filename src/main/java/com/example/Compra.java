@@ -1,5 +1,6 @@
 package com.example;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Compra {
@@ -7,14 +8,17 @@ public class Compra {
     private String descricao;
     private double valor;
     private Date data;
+    private String categoria;
 
     // Construtor
-    public Compra(String titulo, String descricao, double valor, Date data) {
+    public Compra(String titulo, String descricao, double valor, Date data, String categoria) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.valor = valor;
         this.data = data;
+        this.categoria = categoria;
     }
+
 
     // Métodos getters e setters para os atributos
     public String getTitulo() {
@@ -49,6 +53,14 @@ public class Compra {
         this.data = data;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+   
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -58,6 +70,7 @@ public class Compra {
         stringBuilder.append("Descricao: ").append(descricao).append("\n");
         stringBuilder.append("Valor: ").append(valor).append("\n");
         stringBuilder.append("Data: ").append(dateFormat.format(data)).append("\n");
+        stringBuilder.append("Categoria: ").append(categoria).append("\n");
 
         return stringBuilder.toString();
     }

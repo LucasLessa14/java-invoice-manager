@@ -2,25 +2,27 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Fatura {
-    private Compra compra;
     private String estado;
     private String status;
     private int mesReferencia;
     private int anoReferencia;
     private List<Compra> listaCompras;
     private double valorTotal;
+    private List<String> categorias; // Adicionando a lista de categorias
 
     // Construtor
     public Fatura(String estado, String status, int mesReferencia, int anoReferencia) {
         this.estado = estado;
         this.status = status;
-        this.compra = compra;
         this.mesReferencia = mesReferencia;
         this.anoReferencia = anoReferencia;
         this.listaCompras = new ArrayList<>();
         this.valorTotal = 0.0;
+        this.categorias = new ArrayList<>(); 
     }
 
     // Métodos getters e setters para os atributos
@@ -75,7 +77,26 @@ public class Fatura {
     // Métodos
     public void adicionarCompra(Compra compra) {
         listaCompras.add(compra);
-        valorTotal += compra.getValor(); // Atualiza o valor total da fatura
+        valorTotal += compra.getValor();
+
+        // Verifique se a categoria já existe
+        if (!categorias.contains(compra.getCategoria())) {
+            categorias.add(compra.getCategoria());
+        }
+    }
+    
+    public Map<String, Double> calcularTotalPorCategoria() {
+        Map<String, Double> totalPorCategoria = new HashMap<>();
+
+        for (Compra compra : listaCompras) {
+            String categoria = compra.getCategoria();
+            double valorCompra = compra.getValor();
+
+            // Atualize o total para a categoria
+            totalPorCategoria.put(categoria, totalPorCategoria.getOrDefault(categoria, 0.0) + valorCompra);
+        }
+
+        return totalPorCategoria;
     }
 
     @Override
@@ -98,14 +119,13 @@ public class Fatura {
 
         return stringBuilder.toString();
     }
-
+    
     // Método emitirBoleto: que printa uma lista com as compras
     public void emitirBoleto() {
-        // Chamando o método toString() da classe Compra
-        String detalhesCompra = compra.toString();
-        
-        // Agora você pode usar detalhesCompra como necessário
-        System.out.println("Boleto emitido com base na compra: " + detalhesCompra);
+        System.out.println("Boleto emitido com base nas compras na fatura:");
+        for (Compra compra : listaCompras) {
+            System.out.println(compra.toString());
+        }
     }
 
     // Método calculaTotal: varre as compras e soma os valores
